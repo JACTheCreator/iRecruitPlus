@@ -13,24 +13,11 @@ import en_core_web_sm
 nlp = en_core_web_sm.load()
 from spacy.matcher import PhraseMatcher
 
+mypath='Candidate Resume' 
+onlyfiles = [os.path.join(mypath, f) for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
 
 app = Flask(__name__)
 CORS(app)
-
-candidates = [
-    {
-        'id': 1,
-        'first_name': u'John',
-        'last_name': u'Doe', 
-        'rank': 1
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'rank': 2
-    }
-]
 
 def pdfextract(file):
     fileReader = PyPDF2.PdfFileReader(open(file,'rb'))
@@ -121,7 +108,7 @@ def run():
     final_database2.fillna(0,inplace=True)
     new_data = final_database2.iloc[:,1:]
     new_data.index = final_database2['Candidate Name']
-    return new_data
+    return str(new_data)
 
 @app.route('/<path:path>', methods=['GET'])
 def static_proxy(path):
@@ -131,14 +118,10 @@ def static_proxy(path):
 def root():
   return send_from_directory('./', 'index.html')
 
-@app.route('/api/v1/candidates', methods=['POST'])
+@app.route('/api/v1/candidates', methods=['GET'])
 def get_tasks():
     # f = request.files['file']
     # f.save(secure_filename(f.filename))
-
-    mypath='Candidate Resume' 
-    onlyfiles = [os.path.join(mypath, f) for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
-
     return run()
 
 if __name__ == '__main__':

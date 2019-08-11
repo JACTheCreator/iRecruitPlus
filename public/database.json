@@ -1,0 +1,29 @@
+{
+	"candidates": [
+        {
+            "rank": 1,
+            "name": "Shanshan Ding",
+            "graph": {
+            	"DE":0,   
+            	"DL":0,    
+            	"NL":3,   
+            	"NLP":1,   
+            	"Python":0,    
+            	"R":1 
+            }
+        },
+
+        {
+            "rank": 2,
+            "name": "He Zhang",
+            "graph": {
+            	"DE":1,   
+            	"DL":1,    
+            	"NL":0,   
+            	"NLP":0,   
+            	"Python":1,    
+            	"R":0 
+            }
+        }
+    ]
+}
